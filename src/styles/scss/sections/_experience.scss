@@ -1,0 +1,34 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.experience-section {
+    .section-title {
+        @include section-title;
+    }
+
+    .job {
+        @include entry-block;
+
+        .job-responsibilities,
+        .job-description {
+            @include responsibility-list;
+        }
+
+        .job-header {
+            @include block-header;
+
+            .job-title {
+                @include block-title;
+            }
+
+            .job-period,
+            .job-duration {
+                @include pill($font-size: $font-size-period);
+            }
+        }
+
+        .company-location {
+            @include block-location;
+        }
+    }
+}

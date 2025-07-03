@@ -1,0 +1,37 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.education-section {
+  @include entry-block;
+    .section-title {
+        @include section-title;
+    }
+
+    .education {
+
+        @include entry-block;
+        
+        .education-responsibilities,
+        .education-description {
+            @include responsibility-list;
+        }
+
+        .education-header {
+
+            @include block-header;
+
+            .education-title {
+                @include block-title;
+            }
+
+            .education-period,
+            .education-duration {
+                @include pill($font-size: $font-size-period);
+            }
+        }
+
+        .university-location {
+            @include block-location;
+        }
+    }
+}

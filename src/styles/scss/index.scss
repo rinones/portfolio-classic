@@ -1,0 +1,250 @@
+@use "./utils/variables" as *;
+@use "./utils/mixins" as *;
+@use "./sections/experience" as *;
+@use "./sections/education" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-font;
+  font-size: $font-size-base;
+  line-height: $line-height;
+  color: $text-color;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 1.3rem 1.8rem;
+
+  @media (max-width: 900px) {
+    padding: 0.5rem 0.5rem;
+  }
+
+  @media print {
+    padding: 0;
+  }
+}
+
+.cv-container {
+  max-width: 75%;
+  margin: 0 auto;
+  background: white;
+  box-shadow: $shadow-subtle;
+  border-radius: 0.35rem;
+  padding: 1.35rem 3.5rem;
+
+  @media (max-width: 1200px) {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  .job,
+  .education {
+    @media print {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  }
+
+  @media print {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .cv-header {
+    margin-bottom: 1.35rem;
+    padding-bottom: 1.3rem;
+    border-bottom: 0.2rem solid $border-color;
+
+    .header-flex {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 0 1.8rem 0 1.8rem;
+
+      @media (max-width: 900px) {
+        padding-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0 1rem 0 1rem;
+      }
+    }
+
+    .profile-picture-wrapper {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+
+      .profile-img {
+        width: $profile-image-width;
+        height: $profile-image-height;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 0.2rem 0.75rem rgba(44, 62, 80, 0.1);
+        border: 0.2rem solid $border-color;
+      }
+    }
+
+    .personal-info {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .profile-summary {
+        text-align: justify;
+      }
+
+      .profile-portfolio {
+        display: none;
+        @media print {
+          display: block;
+        }
+      }
+
+      .name {
+        font-size: $font-size-name;
+        font-family: $font-name;
+        font-weight: 600;
+        margin-bottom: 0;
+        letter-spacing: 0.05rem;
+        color: $accent-color;
+      }
+
+      .contact-info {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        font-size: $font-size-contact-info;
+        color: $text-color-light;
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+
+        .contact-item {
+          display: flex;
+          align-items: center;
+          gap: $gap-contact-item;
+
+          .icon {
+            width: 1em;
+            height: 1em;
+            min-width: 1em;
+            min-height: 1em;
+            vertical-align: middle;
+            color: inherit;
+            display: inline-block;
+          }
+        }
+      }
+
+      @media (max-width: 900px) {
+        align-items: center;
+        text-align: center;
+
+        .contact-info {
+          flex-direction: column;
+          gap: 0.75rem;
+          align-items: center;
+          padding: 0;
+          background: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .education-section,
+  .skills-section {
+    margin-bottom: $margin-section;
+
+    .section-title {
+      @include section-title;
+    }
+  }
+
+  .cv-container {
+    .job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-responsibilities li,
+    .reports-list li,
+    .inspections-list li {
+      hyphens: auto;
+      word-wrap: break-word;
+    }
+  }
+
+  .accordion {
+    border-radius: 0.35rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 0.35rem 1.45rem 0 rgba(44, 62, 80, 0.1),
+      0.35rem 0 1.1rem -0.35rem rgba(44, 62, 80, 0.08);
+
+    .accordion-main-block {
+      cursor: pointer;
+      padding: $padding-accordion-main-block;
+      transition: background 0.2s;
+      border-radius: 0.35rem 0.35rem 0 0;
+
+      &:hover {
+        background: #eaecef;
+      }
+    }
+
+    .accordion-content {
+      padding: $padding-accordion-content;
+      border-radius: 0 0 0.35rem 0.35rem;
+      border-top: 0.1rem solid $border-color;
+      display: none;
+
+      @media print {
+        display: block !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+  }
+
+  .job-float-img-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .job-float-img {
+    float: right;
+    width: auto;
+    max-width: 13.65rem;
+    height: auto;
+    max-height: 3.2rem;
+    padding: 0.45rem;
+    object-fit: contain;
+    margin: 0 0 1.1rem 1.65rem;
+    border-radius: 0.55rem;
+    box-shadow: 0 0.2rem 0.75rem rgba(44, 62, 80, 0.1);
+    display: block;
+    cursor: pointer;
+  }
+
+  .profile-portfolio {
+    a {
+      text-decoration: none;
+      color: $text-color-light;
+    }
+  }
+}
